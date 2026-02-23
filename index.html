@@ -461,6 +461,152 @@
         .text-center { text-align: center; }
         .mt-5 { margin-top: 60px; }
         .mb-3 { margin-bottom: 30px; }
+
+        /* ---------- TERMS POPUP (leedsphere style) ---------- */
+        .tos-popup {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 20, 35, 0.7);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 1rem;
+        }
+        .tos-popup.show {
+            display: flex;
+        }
+        .popup-card {
+            background: #ffffff;
+            max-width: 780px;
+            width: 100%;
+            max-height: 85vh;
+            border-radius: 36px;
+            box-shadow: 0 35px 70px -10px #0b1730;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: popFade 0.2s ease;
+            border: 1px solid #cfdcff;
+        }
+        @keyframes popFade {
+            0% { opacity: 0.5; transform: scale(0.98) translateY(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .popup-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 2rem;
+            background: #0e1322;
+            color: white;
+        }
+        .popup-header h3 {
+            font-weight: 500;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .popup-header h3 i {
+            color: #7b9cff;
+        }
+        .popup-header .close-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            font-size: 2.2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .popup-header .close-btn:hover {
+            background: #3a4e7a;
+        }
+        .popup-content {
+            padding: 1.8rem 2rem;
+            overflow-y: auto;
+            background: #fbfdff;
+            font-size: 0.95rem;
+            color: #1d263b;
+            line-height: 1.55;
+        }
+        .terms-document h2 {
+            font-size: 1.4rem;
+            font-weight: 650;
+            color: #0b1b42;
+            margin: 1rem 0 0.5rem;
+            border-bottom: 1px solid #e2ebf6;
+            padding-bottom: 0.15rem;
+        }
+        .terms-document h3 {
+            font-size: 1.1rem;
+            font-weight: 650;
+            margin: 0.9rem 0 0.1rem;
+            color: #17305e;
+        }
+        .terms-document p {
+            margin: 0.6rem 0;
+        }
+        .terms-document ul {
+            margin: 0.2rem 0 0.8rem 1.2rem;
+        }
+        .terms-document li {
+            margin: 0.2rem 0;
+        }
+        .popup-footer {
+            padding: 1rem 2rem 1.2rem;
+            background: #f2f6fe;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            border-top: 1px solid #dee9fc;
+        }
+        .btn-close-light {
+            background: white;
+            border: 1px solid #b8caf0;
+            border-radius: 40px;
+            padding: 0.5rem 2rem;
+            font-weight: 500;
+            color: #162f5c;
+            cursor: pointer;
+        }
+        .btn-close-light:hover {
+            background: #e3ebff;
+        }
+        .btn-accept {
+            background: #162f5c;
+            border: none;
+            border-radius: 40px;
+            padding: 0.5rem 2.2rem;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 6px 12px -8px #1f3d80;
+            cursor: pointer;
+        }
+        .btn-accept:hover {
+            background: #0d2244;
+        }
+        /* small link in footer */
+        .terms-link {
+            background: none;
+            border: none;
+            color: #b2c0f0;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0;
+        }
+        .terms-link:hover {
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -500,13 +646,118 @@
                         <ul><li><a onclick="showPage('product')">Features</a></li><li><a onclick="showPage('pricing')">Pricing</a></li><li><a href="#">Integrations</a></li></ul>
                     </div>
                     <div class="footer-col"><h4>Resources</h4><ul><li><a onclick="showPage('resources')">Blog</a></li><li><a href="#">Guides</a></li><li><a href="#">Support</a></li></ul></div>
-                    <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li></ul></div>
+                    <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li><li><button class="terms-link" id="termsPopupBtn"><i class="fas fa-file-contract"></i> Terms and conditions</button></li></ul></div>
                 </div>
                 <div class="copyright">
                     © 2025 Leedsphere, Inc. · All rights reserved.
                 </div>
             </div>
         </footer>
+    </div>
+
+    <!-- TERMS POPUP (hidden by default) -->
+    <div class="tos-popup" id="termsPopup">
+        <div class="popup-card">
+            <div class="popup-header">
+                <h3><i class="fas fa-file-signature"></i> Leedsphere · Terms of Service</h3>
+                <button class="close-btn" id="closePopupBtn">&times;</button>
+            </div>
+            <div class="popup-content">
+                <div class="terms-document">
+                    <h2>1. WHO WE ARE</h2>
+                    <p>Crivient ("Crivient", "we", "us", "our") operates the Service, which is a cloud-based CRM platform available at crivient.com. Our contact details are: Email: admin@crivient.com — Address: 476/42 Dhan Nadi, Vijay Singh Pathik Nagar, Ajmer, Rajasthan 305001, India. For certain transactions, payments are processed by Paddle as our Merchant of Record, as explained in section 6 (Fees, payments and billing).</p>
+
+                    <h2>2. ELIGIBILITY AND ACCOUNTS</h2>
+                    <h3>2.1 Business Use Only</h3>
+                    <p>The Service is intended for use by businesses, organizations, and professionals, not for personal or household use.</p>
+                    <h3>2.2 Account Registration</h3>
+                    <p>You must provide accurate, current, and complete information when creating an account and keep it up to date. You are responsible for maintaining the confidentiality of your login credentials and for all activities that occur under your account.</p>
+                    <h3>2.3 Authorized Users</h3>
+                    <p>You may authorize individuals within your organization ("Authorized Users") to access your workspace, subject to any seat or usage limits in your subscription. You are responsible for the actions of your Authorized Users and for ensuring they comply with these Terms.</p>
+
+                    <h2>3. SERVICE LICENSE AND USE</h2>
+                    <h3>3.1 License to Use the Service</h3>
+                    <p>Subject to your compliance with these Terms and timely payment of all fees, Crivient grants you a limited, non-exclusive, non-transferable, non-sublicensable right to access and use the Service for your internal business purposes during the subscription term.</p>
+                    <h3>3.2 Acceptable Use</h3>
+                    <p>You must not: Use the Service in any way that violates applicable law, regulations, or third-party rights. Upload, store, or transmit any harmful code, malware, or content that is unlawful, abusive, or infringing. Attempt to reverse engineer, decompile, or extract source code from the Service, except to the extent expressly permitted by law. Circumvent usage limits, security features, or technical protections in the Service. Use the Service to build a competing product or service. Crivient reserves the right to suspend or terminate access where there is actual or suspected abuse, violation of these Terms, or violation of Paddle's acceptable use requirements.</p>
+
+                    <h2>4. YOUR DATA AND PRIVACY</h2>
+                    <h3>4.1 Customer Data</h3>
+                    <p>"Customer Data" means all data, content, and information that you or your Authorized Users submit or store in the Service, including your customer records, contacts, activities, and communications. You retain ownership of Customer Data. You are responsible for ensuring that you have all necessary rights and lawful bases to submit Customer Data to the Service and to use it as configured in your account.</p>
+                    <h3>4.2 License to Customer Data</h3>
+                    <p>You grant Crivient a worldwide, limited, non-exclusive license to host, use, process, transmit, and display Customer Data only as necessary to provide, maintain, secure, and improve the Service and to comply with legal obligations.</p>
+                    <h3>4.3 Data Protection</h3>
+                    <p>Crivient processes personal data in accordance with the Crivient Privacy Policy, which forms part of these Terms. Where required by law (for example, under GDPR or similar frameworks), Crivient may offer a separate data processing agreement governing processing of personal data on your behalf.</p>
+
+                    <h2>5. SERVICE AVAILABILITY AND SUPPORT</h2>
+                    <h3>5.1 Availability</h3>
+                    <p>Crivient aims to keep the Service available and operating reliably but does not guarantee uninterrupted or error-free operation. The Service may be temporarily unavailable due to scheduled maintenance, emergency maintenance, or factors outside Crivient's reasonable control (for example, network or infrastructure provider issues).</p>
+                    <h3>5.2 Modifications to the Service</h3>
+                    <p>Crivient may improve, update, or modify the Service from time to time, including adding or removing features. If Crivient makes changes that materially reduce core functionality, reasonable efforts will be made to notify you in advance where practicable.</p>
+                    <h3>5.3 Support</h3>
+                    <p>Crivient may provide standard support via email or other channels as specified on the website or in your plan. Any enhanced or premium support offerings may be subject to additional terms and fees.</p>
+
+                    <h2>6. FEES, PAYMENTS, AND BILLING</h2>
+                    <h3>6.1 Subscriptions and Pricing</h3>
+                    <p>Access to the Service is generally provided on a subscription basis (for example, monthly or annually) as described on the Crivient website or in your order. Crivient may change prices and plan structures from time to time; price changes will not apply to an existing paid term already invoiced, but will apply upon renewal after notice.</p>
+                    <h3>6.2 Paddle as Merchant of Record</h3>
+                    <p>For many transactions, Paddle.com acts as the Merchant of Record and authorized reseller of the Service. This means you purchase the subscription from Paddle, and Paddle is responsible for processing your payment, collecting applicable taxes, and issuing invoices, while Crivient provides the Service under these Terms (the "Supplier Agreement").</p>
+                    <h3>6.3 Payment Processing</h3>
+                    <p>When you checkout, you may be redirected to a Paddle-hosted payment page or embedded Paddle checkout governed by Paddle's own buyer terms and privacy policy, available at paddle.com/legal. Payment methods, billing cycles, taxes, and invoicing are handled by Paddle (or other designated payment providers) in accordance with their terms.</p>
+                    <h3>6.4 Renewals and Cancellation</h3>
+                    <p>Unless otherwise stated, subscriptions automatically renew for successive periods at the then-current price, using the payment method on file. You may cancel auto-renewal at any time via your account settings or via the Paddle subscription management interface, but cancellation will generally take effect at the end of the then-current billing period and will not trigger a refund for amounts already paid, unless required by law or by our refund policy.</p>
+                    <h3>6.5 Refunds</h3>
+                    <p>Any refunds are subject to Crivient's Refund Policy and, where Paddle is Merchant of Record, may be processed by Paddle in accordance with its rules.</p>
+
+                    <h2>7. INTELLECTUAL PROPERTY</h2>
+                    <h3>7.1 Crivient IP</h3>
+                    <p>The Service, including all software, technology, user interfaces, design, and documentation, is owned or licensed by Crivient and is protected by intellectual property laws. Except for the limited license expressly granted in section 3, no rights are granted to you.</p>
+                    <h3>7.2 Feedback</h3>
+                    <p>If you provide suggestions, ideas, or feedback about the Service ("Feedback"), you grant Crivient a perpetual, irrevocable, worldwide, royalty-free license to use the Feedback without restriction or compensation.</p>
+
+                    <h2>8. THIRD-PARTY SERVICES</h2>
+                    <p>The Service may integrate or interoperate with third-party products or services (for example, email providers, analytics tools, or payment processors). Use of such third-party services is subject to their own terms, conditions, and privacy policies, and Crivient is not responsible for their actions or omissions.</p>
+
+                    <h2>9. SUSPENSION AND TERMINATION</h2>
+                    <h3>9.1 Suspension</h3>
+                    <p>Crivient may suspend access to the Service (in whole or in part) immediately if: You fail to pay fees when due. Crivient reasonably suspects fraudulent or abusive activity, or a material breach of these Terms. Suspension is necessary to comply with law or protect the security or integrity of the Service.</p>
+                    <h3>9.2 Termination by You</h3>
+                    <p>You may stop using the Service at any time and may cancel your subscription in accordance with section 6.4.</p>
+                    <h3>9.3 Termination by Crivient</h3>
+                    <p>Crivient may terminate your account or access to the Service: For material breach of these Terms that remains uncured for 30 days after written notice, or immediately in the case of serious or repeated violations. If Crivient decides to discontinue the Service, in which case reasonable notice will be provided and any pre-paid fees for unused periods may be refunded where applicable.</p>
+                    <h3>9.4 Effects of Termination</h3>
+                    <p>Upon termination: Your right to access the Service will cease. You remain responsible for any outstanding fees. Crivient may delete or anonymize Customer Data after a reasonable retention period, unless required by law to keep it longer.</p>
+
+                    <h2>10. DISCLAIMERS</h2>
+                    <p>To the maximum extent permitted by law, the Service is provided "as is" and "as available" without warranties of any kind, whether express, implied, or statutory, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement. Crivient does not warrant that the Service will be uninterrupted, error-free, or free of harmful components, or that Customer Data will be secure or not otherwise lost or altered, although reasonable measures are taken to protect it.</p>
+
+                    <h2>11. LIMITATION OF LIABILITY</h2>
+                    <p>To the maximum extent permitted by law: Crivient will not be liable for any indirect, incidental, special, consequential, or punitive damages, or loss of profits, revenue, goodwill, or data arising out of or related to your use of the Service, even if advised of the possibility of such damages. Crivient's aggregate liability for all claims arising out of or relating to the Service or these Terms will not exceed the total amount of fees paid by you for the Service during the twelve (12) months preceding the event giving rise to the claim. Nothing in these Terms limits liability that cannot be limited under applicable law (for example, liability for death or personal injury caused by negligence, or for fraud).</p>
+
+                    <h2>12. INDEMNIFICATION</h2>
+                    <p>You agree to indemnify and hold harmless Crivient and its officers, directors, employees, and agents from and against any claims, damages, losses, liabilities, costs, and expenses (including reasonable legal fees) arising out of or related to: Your use of the Service in violation of these Terms or applicable law. Customer Data, including any allegation that Customer Data infringes or misappropriates a third party's rights or violates applicable data protection laws.</p>
+
+                    <h2>13. CHANGES TO THESE TERMS</h2>
+                    <p>Crivient may update these Terms from time to time. When changes are material, reasonable efforts will be made to notify you (for example, via email or in-app notification). Continued use of the Service after the effective date of updated Terms constitutes your acceptance of the changes. If you do not agree to the updated Terms, you must stop using the Service and cancel any active subscription.</p>
+
+                    <h2>14. GOVERNING LAW AND DISPUTES</h2>
+                    <p>Unless prohibited by applicable law, these Terms are governed by the laws of India without regard to its conflict of laws rules. Any dispute arising out of or in connection with these Terms or the Service will be subject to the exclusive jurisdiction of the courts of Rajasthan, India, except where mandatory law provides otherwise.</p>
+
+                    <h2>15. MISCELLANEOUS</h2>
+                    <p>Entire Agreement: These Terms, together with any order or plan details and the Privacy Policy and Refund Policy, form the entire agreement between you and Crivient regarding the Service. Severability: If any provision is held invalid or unenforceable, the remaining provisions will remain in full force. No Waiver: A failure to enforce any right or provision is not a waiver of that right or provision. Assignment: You may not assign or transfer your rights or obligations under these Terms without Crivient's prior written consent. Crivient may assign these Terms in connection with a merger, acquisition, or sale of assets, or by operation of law.</p>
+
+                    <h2>16. CONTACT</h2>
+                    <p>If you have any questions about these Terms, please contact: Crivient — Email: admin@crivient.com — Address: 476/42 Dhan Nadi, Vijay Singh Pathik Nagar, Ajmer, Rajasthan 305001, India.</p>
+
+                    <hr style="margin:1rem 0; border-color:#e0e8f5;">
+                    <p style="color:#1f2b4e;"><strong>END OF TERMS OF SERVICE</strong> — This Terms of Service is effective as of January 2, 2026. Your continued use of Crivient constitutes acceptance of these Terms.</p>
+                </div>
+            </div>
+            <div class="popup-footer">
+                <button class="btn-close-light" id="dismissPopupBtn">Close</button>
+                <button class="btn-accept" id="acceptPopupBtn">I understand</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -674,6 +925,24 @@
 
         // make function global for onclick
         window.showPage = showPage;
+
+        // ------- TERMS POPUP LOGIC -------
+        const popup = document.getElementById('termsPopup');
+        const openBtn = document.getElementById('termsPopupBtn');
+        const closeBtn = document.getElementById('closePopupBtn');
+        const dismissBtn = document.getElementById('dismissPopupBtn');
+        const acceptBtn = document.getElementById('acceptPopupBtn');
+
+        function openPopup() { if(popup) popup.classList.add('show'); }
+        function closePopup() { if(popup) popup.classList.remove('show'); }
+
+        if (openBtn) openBtn.addEventListener('click', (e) => { e.preventDefault(); openPopup(); });
+        if (closeBtn) closeBtn.addEventListener('click', closePopup);
+        if (dismissBtn) dismissBtn.addEventListener('click', closePopup);
+        if (acceptBtn) acceptBtn.addEventListener('click', closePopup);
+
+        window.addEventListener('click', (e) => { if (e.target === popup) closePopup(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && popup && popup.classList.contains('show')) closePopup(); });
     </script>
     <style>
         /* additional floating animation */
