@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leedsphere · product features</title>
+    <!-- Line 7: Different title for product page -->
+    
+    <!-- Same CSS links as index.html -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    
+    <style>
+    /* Same base styles as index.html - copy lines 17-166 from index.html */
+    /* Plus additional product-specific styles: */
+    
+        .product-grid {
+            /* Line 19: Product feature grid */
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+            gap: 40px;
+            margin: 70px 0;
+        }
+        
+        .feature-block {
+            /* Line 26: Individual feature card */
+            background: white;
+            border-radius: 34px;
+            padding: 40px;
+            border: 1px solid #e7f0fd;
+            transition: 0.2s;
+        }
+        
+        .feature-block:hover {
+            /* Line 34: Hover effect */
+            transform: translateY(-8px);
+            border-color: #a2baff;
+        }
+        
+        .icon-lg {
+            /* Line 39: Large icons */
+            font-size: 2.6rem;
+            color: #3451e0;
+            margin-bottom: 25px;
+        }
+        
+        .showcase {
+            /* Line 45: Feature showcase section */
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            margin: 80px 0;
+            align-items: center;
+        }
+        
+        .showcase-text {
+            /* Line 52: Text column */
+            flex: 1 1 300px;
+        }
+        
+        .showcase-media {
+            /* Line 56: Media column */
+            flex: 1 1 380px;
+            background: #edf3ff;
+            border-radius: 44px;
+            padding: 60px 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- SAME NAVBAR as index.html, but change active class -->
+        <nav class="navbar">
+            <a href="index.html" class="logo"><i class="fas fa-bolt"></i> leedsphere</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="product.html" class="active">Product</a>  <!-- Line 70: 'active' on Product -->
+                <a href="solutions.html">Solutions</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="resources.html">Resources</a>
+            </div>
+            <div class="nav-right">
+                <a href="#" class="btn btn-outline"><i class="far fa-user"></i> Sign in</a>
+                <a href="#" class="btn btn-primary">Get started <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </nav>
+
+        <main>
+            <!-- Page header - unique to product page -->
+            <div style="text-align:center; padding:50px 0 20px;">
+                <h1 style="font-size:3.2rem;">Built for the way <span style="color:#3451e0;">modern teams work</span></h1>
+                <p style="font-size:1.2rem; color:#51668a; max-width:700px; margin:20px auto;">Deep integrations, real-time editing, and enterprise-grade security — all in one place.</p>
+            </div>
+
+            <!-- First showcase - Channels -->
+            <div class="showcase">
+                <div class="showcase-text">
+                    <h2 style="font-size:2.4rem; margin-bottom:20px;">Channels & threads</h2>
+                    <p style="color:#3c4a70;">Create dedicated spaces for every project, team, or topic. Keep conversations organized with threaded replies, pinned messages, and rich media previews.</p>
+                </div>
+                <div class="showcase-media">
+                    <i class="fas fa-comments" style="font-size:4rem; color:#2b3f94;"></i>
+                    <p style="margin-top:20px;">#engineering · #design · #launch</p>
+                </div>
+            </div>
+
+            <!-- Second showcase - Integrations (reversed) -->
+            <div class="showcase" style="flex-direction:row-reverse;">
+                <div class="showcase-text">
+                    <h2 style="font-size:2.4rem; margin-bottom:20px;">Native integrations</h2>
+                    <p>Connect GitHub, Jira, Google Drive, Figma, and more. Get updates, preview files, and take action without switching contexts.</p>
+                </div>
+                <div class="showcase-media">
+                    <i class="fab fa-github" style="font-size:3rem; margin:0 10px;"></i>
+                    <i class="fab fa-jira" style="font-size:3rem;"></i>
+                    <i class="fab fa-google" style="font-size:3rem;"></i>
+                </div>
+            </div>
+
+            <!-- Product features grid -->
+            <div class="product-grid">
+                <div class="feature-block">
+                    <i class="fas fa-bolt icon-lg"></i>
+                    <h3>Real-time sync</h3>
+                    <p>Edits, reactions, and messages appear instantly across all devices.</p>
+                </div>
+                <div class="feature-block">
+                    <i class="fas fa-magnifying-glass icon-lg"></i>
+                    <h3>Universal search</h3>
+                    <p>Find messages, files, and people in seconds — with filters and keywords.</p>
+                </div>
+                <div class="feature-block">
+                    <i class="fas fa-lock icon-lg"></i>
+                    <h3>Enterprise security</h3>
+                    <p>SAML, SSO, end-to-end encryption, and compliance ready (SOC2).</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- SAME FOOTER as index.html -->
+        <footer class="site-footer">
+            <!-- Copy footer lines 366-400 from index.html -->
+        </footer>
+    </div>
+</body>
+</html>

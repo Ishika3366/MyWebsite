@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leedsphere · simple, fair pricing</title>
+    <!-- Same CSS links -->
+    
+    <style>
+    /* Additional pricing styles */
+    
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 34px;
+            padding: 40px 30px;
+            border: 1px solid #e3ecfc;
+            position: relative;
+            transition: 0.2s;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: #9eb4ff;
+            box-shadow: 0 30px 40px -24px #8195cf;
+        }
+        
+        .popular {
+            border: 2px solid #1f2c4b;
+            background: #f7fbff;
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -14px;
+            left: 30px;
+            background: #1f2c4b;
+            color: white;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+        
+        .price small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #5a6d9a;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .pricing-card li {
+            margin: 12px 0;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .pricing-card li i {
+            color: #3451e0;
+        }
+        
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 22px;
+            padding: 28px;
+            margin-bottom: 20px;
+            border: 1px solid #e5eefa;
+        }
+    </style>
+</head>
+<body>
+    <!-- Same navbar with active on Pricing -->
+    
+    <main>
+        <div style="text-align:center; padding:50px 0 20px;">
+            <h1 style="font-size:3.2rem;">Plans for teams of all sizes</h1>
+            <p style="color:#51678f; font-size:1.2rem;">14-day free trial on all plans · cancel anytime · no credit card for starter</p>
+        </div>
+
+        <!-- Pricing cards -->
+        <div class="pricing-grid">
+            <!-- Starter plan -->
+            <div class="pricing-card">
+                <h3>Starter</h3>
+                <div class="price">$199<small>/mo</small></div>
+                <ul>
+                    <li><i class="fas fa-check"></i> Up to 50 members</li>
+                    <li><i class="fas fa-check"></i> 10GB storage</li>
+                    <li><i class="fas fa-check"></i> Basic integrations</li>
+                    <li><i class="fas fa-check"></i> Email support</li>
+                </ul>
+                <a href="#" class="btn btn-outline btn-block">Start free trial</a>
+            </div>
+            
+            <!-- Pro plan (popular) -->
+            <div class="pricing-card popular">
+                <span class="popular-badge">Most popular</span>
+                <h3>Pro</h3>
+                <div class="price">$499<small>/mo</small></div>
+                <ul>
+                    <li><i class="fas fa-check"></i> Up to 250 members</li>
+                    <li><i class="fas fa-check"></i> 100GB storage</li>
+                    <li><i class="fas fa-check"></i> Premium integrations & APIs</li>
+                    <li><i class="fas fa-check"></i> Priority 24/7 support</li>
+                    <li><i class="fas fa-check"></i> Advanced analytics</li>
+                </ul>
+                <a href="#" class="btn btn-primary btn-block">Start free trial</a>
+            </div>
+            
+            <!-- Enterprise plan -->
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <div class="price">$999<small>/mo</small></div>
+                <ul>
+                    <li><i class="fas fa-check"></i> Unlimited members</li>
+                    <li><i class="fas fa-check"></i> Unlimited storage</li>
+                    <li><i class="fas fa-check"></i> SSO & SAML</li>
+                    <li><i class="fas fa-check"></i> Dedicated account manager</li>
+                    <li><i class="fas fa-check"></i> On‑premise option</li>
+                </ul>
+                <a href="#" class="btn btn-outline btn-block">Contact sales</a>
+            </div>
+        </div>
+
+        <!-- FAQ section -->
+        <div style="max-width:800px; margin:80px auto;">
+            <h2 style="text-align:center; margin-bottom:40px;">Frequently asked questions</h2>
+            <div class="faq-item">
+                <strong>Can I change plans later?</strong> Yes, upgrade or downgrade anytime. Changes apply immediately.
+            </div>
+            <div class="faq-item">
+                <strong>Do you offer annual discounts?</strong> Absolutely — save 20% with yearly billing.
+            </div>
+            <div class="faq-item">
+                <strong>Is there a free plan for non‑profits?</strong> We offer 30% discount for eligible organizations. Contact us.
+            </div>
+        </div>
+    </main>
+    
+    <!-- Same footer -->
+</body>
+</html>
